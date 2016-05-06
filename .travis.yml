@@ -1,9 +1,12 @@
 sudo: required
 dist: trusty
 before_install:
-  - export DEBIAN_FRONTEND=noninteractive
   - export MYSQL_APT_CONFIG_FILE=mysql-apt-config_0.7.2-1_all.deb
   - wget http://dev.mysql.com/get/$MYSQL_APT_CONFIG_FILE
-  - sudo dpkg -i --force-confnew $MYSQL_APT_CONFIG_FILE
+  - sudo dpkg -i $MYSQL_APT_CONFIG_FILE
   - sudo apt-get -y update
-  - sudo apt-get -qq install mysql-server-5.7
+  - sudo apt-get -qq install mysql-server-5.7 mysql-client-core-5.7 mysql-client-5.7
+install: true
+script:
+  - mysql --version
+  - mysql -e "SELECT VERSION();"
