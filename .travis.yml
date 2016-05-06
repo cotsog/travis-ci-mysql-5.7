@@ -10,3 +10,4 @@ install: true
 script:
   - mysql --version
   - mysql -u root
+  - sudo grep 'temporary password' /var/log/mysqld.log
