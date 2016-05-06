@@ -9,4 +9,4 @@ before_install:
 install: true
 script:
   - mysql --version
-  - mysql -e "SELECT VERSION();"
+  - mysql -u root -e "SELECT VERSION();"
