@@ -1,13 +1,15 @@
+language: ruby
+
 sudo: required
 dist: trusty
-before_install:
-  - export MYSQL_APT_CONFIG_FILE=mysql-apt-config_0.7.2-1_all.deb
-  - wget http://dev.mysql.com/get/$MYSQL_APT_CONFIG_FILE
-  - sudo dpkg -i $MYSQL_APT_CONFIG_FILE
-  - sudo apt-get -y update
-  - sudo apt-get -y install mysql-server-5.7 mysql-client-core-5.7 mysql-client-5.7
-install: true
+
+cache:
+  directories:
+    - mysql-5.7-packages
+
+install:
+  - chmod +x install-mysql-5.7.sh
+  - ./install-mysql-5.7.sh
+
 script:
   - mysql --version
-  - mysql -u root
-  - sudo grep 'temporary password' /var/log/mysqld.log
